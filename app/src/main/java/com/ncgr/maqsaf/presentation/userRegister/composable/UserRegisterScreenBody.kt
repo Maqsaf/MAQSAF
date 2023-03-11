@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDirection
@@ -26,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ncgr.maqsaf.R
 import com.ncgr.maqsaf.presentation.userRegister.viewModel.UserRegisterViewModel
+import com.ncgr.maqsaf.ui.theme.BodyTextStyle
+import com.ncgr.maqsaf.ui.theme.ButtonTextStyle
+import com.ncgr.maqsaf.ui.theme.TitleTextStyle
 
 @Composable
 fun UserRegisterScreenBody(
@@ -38,7 +40,7 @@ fun UserRegisterScreenBody(
 
     Column(
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.End,
         modifier = modifier
             .fillMaxSize()
             .padding(top = 20.dp, end = 20.dp, start = 20.dp)
@@ -48,34 +50,23 @@ fun UserRegisterScreenBody(
             contentDescription = "MAQSAF Logo",
             contentScale = ContentScale.Fit,
             modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .height(200.dp)
+                .padding(top = 20.dp)
+                .fillMaxWidth(1f)
+                .height(150.dp)
         )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text("التسجيل", style = TitleTextStyle.copy(color = Color(0xFF183C69)))
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        Text(
+            text = "الاسم",
+            style = BodyTextStyle.copy(color = Color(0xFF183C69)),
+            fontSize = 18.sp
+        )
         OutlinedTextField(
-            trailingIcon = {
-                Image(
-                    painter = painterResource(id = R.drawable.baseline_person_24),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .width(50.dp)
-                        .height(50.dp)
-                )
-            },
             value = username ?: "",
-            placeholder = {
-                Text(
-                    "اسم المستخدم",
-                    style = TextStyle(
-                        textDirection = TextDirection.Rtl,
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
             onValueChange = { viewModel.setUsername(it) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -86,28 +77,13 @@ fun UserRegisterScreenBody(
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        Text(
+            text = "الرقم الوظيفي",
+            style = BodyTextStyle.copy(color = Color(0xFF183C69)),
+            fontSize = 18.sp
+        )
         OutlinedTextField(
-            trailingIcon = {
-                Image(
-                    painter = painterResource(id = R.drawable.office_worker__2__1),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .width(50.dp)
-                        .height(50.dp)
-                )
-            },
             value = phoneNumber ?: "",
-            placeholder = {
-                Text(
-                    "رقمك الوظيفي",
-                    style = TextStyle(
-                        textDirection = TextDirection.Rtl,
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
             onValueChange = { if (it.length <= 6) viewModel.setPhoneNumber(it) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -118,28 +94,13 @@ fun UserRegisterScreenBody(
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        Text(
+            text = "الرقم السري",
+            style = BodyTextStyle.copy(color = Color(0xFF183C69)),
+            fontSize = 18.sp
+        )
         OutlinedTextField(
-            trailingIcon = {
-                Image(
-                    painter = painterResource(id = R.drawable.locker),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .width(50.dp)
-                        .height(50.dp)
-                )
-            },
             value = passwordText ?: "",
-            placeholder = {
-                Text(
-                    "كلمة المرور",
-                    style = TextStyle(
-                        textDirection = TextDirection.Rtl,
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
             onValueChange = { viewModel.setPasswordText(it) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -149,10 +110,11 @@ fun UserRegisterScreenBody(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.weight(1f))
 
         Box(contentAlignment = Alignment.Center,
             modifier = Modifier
+                .fillMaxWidth()
                 .clip(RoundedCornerShape(30))
                 .background(Color(0xff183C69))
                 .clickable {
@@ -160,13 +122,11 @@ fun UserRegisterScreenBody(
                 }
                 .padding(10.dp)) {
             Text(
-                text = "تسجيل كجديد",
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.White
-                )
+                text = "تسجيل",
+                style = ButtonTextStyle.copy(color = Color.White, fontSize = 20.sp)
             )
         }
+
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }

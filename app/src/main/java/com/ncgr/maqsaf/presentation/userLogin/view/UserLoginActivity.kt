@@ -5,10 +5,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -16,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.ncgr.maqsaf.presentation.common.composable.BottomNcgrLogo
 import com.ncgr.maqsaf.presentation.orderDetails.view.OrderDetailsActivity
 import com.ncgr.maqsaf.presentation.user.view.UserActivity
 import com.ncgr.maqsaf.presentation.userLogin.composable.LoginDialog
@@ -58,13 +56,13 @@ class UserLoginActivity : AppCompatActivity() {
             modifier = modifier
                 .fillMaxSize()
         ) { paddingValues ->
-            Column(
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Box(contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
+
+                BottomNcgrLogo()
 
                 //Body
                 LoginScreenBody(
