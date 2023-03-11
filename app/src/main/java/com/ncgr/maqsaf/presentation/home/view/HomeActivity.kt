@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
@@ -16,10 +17,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.ncgr.maqsaf.R
+import com.ncgr.maqsaf.presentation.common.composable.BottomNcgrLogo
 import com.ncgr.maqsaf.presentation.common.utils.Resource
 import com.ncgr.maqsaf.presentation.home.composable.Body
 import com.ncgr.maqsaf.presentation.home.viewModel.HomeViewModel
@@ -63,22 +62,7 @@ class HomeActivity : AppCompatActivity() {
                     .padding(paddingValues)
             ) {
 
-                Box(
-                    contentAlignment = Alignment.BottomStart,
-                    modifier = Modifier.fillMaxSize()
-
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ncgr_logo_only),
-                        contentDescription = "Bottom Logo",
-                        contentScale = ContentScale.Fit,
-                        alignment = Alignment.BottomStart,
-                        alpha = 0.15f,
-                        modifier = Modifier
-                            .padding(top = 10.dp)
-                            .size(300.dp)
-                    )
-                }
+                BottomNcgrLogo(logoId = R.drawable.ncgr_logo_only, alpha = 0.15f)
 
                 when (checkingUser) {
                     is Resource.Error -> {

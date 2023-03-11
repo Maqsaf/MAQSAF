@@ -2,13 +2,13 @@ package com.ncgr.maqsaf.presentation.userLogin.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDirection
@@ -27,7 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ncgr.maqsaf.R
 import com.ncgr.maqsaf.presentation.userLogin.viewModel.UserLoginViewModel
-import com.ncgr.maqsaf.ui.theme.Blue
+import com.ncgr.maqsaf.ui.theme.BodyTextStyle
+import com.ncgr.maqsaf.ui.theme.ButtonTextStyle
+import com.ncgr.maqsaf.ui.theme.TitleTextStyle
 
 @Composable
 fun LoginScreenBody(
@@ -39,45 +40,30 @@ fun LoginScreenBody(
     val passwordText by viewModel.passwordText.collectAsState()
 
     Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.End,
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 20.dp, end = 20.dp, start = 20.dp)
+            .padding(horizontal = 30.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.maqsaf_logo),
             contentDescription = "MAQSAF Logo",
             contentScale = ContentScale.Fit,
             modifier = Modifier
-                .fillMaxWidth(0.8f)
-                .height(200.dp)
+                .padding(top = 20.dp)
+                .fillMaxWidth(1f)
+                .height(150.dp)
         )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text("تسجيل الدخول", style = TitleTextStyle.copy(color = Color(0xFF183C69)))
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        Text(text = "الرقم الوظيفي", style = BodyTextStyle.copy(color = Color(0xFF183C69)), fontSize = 18.sp)
         OutlinedTextField(
-            trailingIcon = {
-                Image(
-                    painter = painterResource(id = R.drawable.office_worker__2__1),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .width(50.dp)
-                        .height(50.dp)
-                )
-            },
             value = phoneNumber ?: "",
-            placeholder = {
-                Text(
-                    "رقمك الوظيفي",
-                    style = TextStyle(
-                        textDirection = TextDirection.Rtl,
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
             onValueChange = { if (it.length <= 6) viewModel.setPhoneNumber(it) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -88,28 +74,9 @@ fun LoginScreenBody(
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        Text(text = "الرقم السري", style = BodyTextStyle.copy(color = Color(0xFF183C69), fontSize = 18.sp))
         OutlinedTextField(
-            trailingIcon = {
-                Image(
-                    painter = painterResource(id = R.drawable.locker),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .width(50.dp)
-                        .height(50.dp)
-                )
-            },
             value = passwordText ?: "",
-            placeholder = {
-                Text(
-                    "كلمة المرور",
-                    style = TextStyle(
-                        textDirection = TextDirection.Rtl,
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
             onValueChange = { viewModel.setPasswordText(it) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -119,10 +86,11 @@ fun LoginScreenBody(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.weight(1f))
 
         Box(contentAlignment = Alignment.Center,
             modifier = Modifier
+                .fillMaxWidth()
                 .clip(RoundedCornerShape(30))
                 .background(Color(0xff183C69))
                 .clickable {
@@ -132,11 +100,7 @@ fun LoginScreenBody(
         {
             Text(
                 text = "تسجيل الدخول",
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.White
-                )
+                style = ButtonTextStyle.copy(color = Color.White, fontSize = 20.sp)
             )
         }
 
@@ -144,21 +108,22 @@ fun LoginScreenBody(
 
         Box(contentAlignment = Alignment.Center,
             modifier = Modifier
+                .fillMaxWidth()
                 .clip(RoundedCornerShape(30))
-                .background(Color(0xff183C69))
+                .border(width = 2.dp, color = Color(0xFF183C69), shape = RoundedCornerShape(30))
+                .background(Color.White)
                 .clickable {
                     navigateToRegisterActivity()
                 }
-                .padding(10.dp))
+                .padding(10.dp)
+        )
         {
             Text(
-                text = "تسجيل كجديد",
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    color = Color.White
-                )
+                text = "تسجيل",
+                style = ButtonTextStyle.copy(color = Color(0xFF183C69), fontSize = 20.sp)
             )
         }
+
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }

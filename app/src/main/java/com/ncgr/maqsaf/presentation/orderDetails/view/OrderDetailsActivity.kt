@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.ncgr.maqsaf.presentation.common.composable.AppBar
+import com.ncgr.maqsaf.presentation.common.composable.BottomNcgrLogo
 import com.ncgr.maqsaf.presentation.home.view.HomeActivity
 import com.ncgr.maqsaf.presentation.orderDetails.composable.OrderDetailsBody
 import com.ncgr.maqsaf.presentation.orderDetails.viewModel.OrderDetailsViewModel
@@ -53,6 +54,8 @@ class OrderDetailsActivity : AppCompatActivity() {
             modifier = modifier
                 .fillMaxSize()
         ) { paddingValues ->
+            BottomNcgrLogo()
+
             Column(
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally,

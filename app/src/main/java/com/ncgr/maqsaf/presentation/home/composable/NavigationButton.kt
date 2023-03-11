@@ -1,5 +1,7 @@
 package com.ncgr.maqsaf.presentation.home.composable
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,10 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.ncgr.maqsaf.ui.theme.ButtonTextStyle
 
 @Composable
 fun NavigationButton(
@@ -26,45 +26,47 @@ fun NavigationButton(
     icon: Int,
 ) {
     Surface(
-        elevation = 3.dp,
+        elevation = 6.dp,
         shape = RoundedCornerShape(20.dp),
-        modifier = modifier.height(400.dp).width(140.dp)
+        modifier = modifier
+            .height(200.dp)
+            .width(140.dp)
     ) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(20.dp))
-                .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(20.dp))
                 .clickable {
                     onClick()
                 }
-                .padding(5.dp)
         ) {
-            Row {
+            Column {
+                Box(contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .weight(2f)
+                        .fillMaxWidth()
+                        .background(Color(0xFFFAFAFA))
+                ) {
+                    Image(
+                        painter = painterResource(id = icon),
+                        contentDescription = "Icon Button",
+                        modifier = Modifier.size(100.dp)
+                    )
+                }
+
                 Box(
-                    contentAlignment = Alignment.CenterEnd,
+                    contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxHeight()
+                        .fillMaxWidth()
+                        .background(Color(0xFF183C69))
                 ) {
                     Text(
                         text = title,
-                        style = TextStyle(
-                            textDirection = TextDirection.Rtl,
-                            fontSize = 20.sp,
-                        ),
+                        style = ButtonTextStyle.copy(color = Color.White),
                     )
                 }
-                Spacer(modifier = Modifier.width(15.dp))
-                Icon(
-                    painter = painterResource(id = icon),
-                    contentDescription = "Icon Button",
-                    tint = Color(0xffAFBC52),
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(0.2f)
-                )
             }
         }
     }
